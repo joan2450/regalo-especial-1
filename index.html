@@ -1,74 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Regalo Especial</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f8f9fa;
-      color: #343a40;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      margin-top: 50px;
-    }
-    .countdown {
-      font-size: 2rem;
-      margin: 20px 0;
-    }
-    .hidden {
-      display: none;
-    }
-    .button {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 5px;
-      margin-top: 20px;
-    }
-    .button:hover {
-      background-color: #0056b3;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regalo de Sebas</title>
 </head>
 <body>
-  <h1>¡Regalo Misterioso!</h1>
-  <p>El regalo estará disponible a las 12:00 a.m.</p>
-  <div class="countdown" id="countdown"></div>
-  <a href="https://www.mediafire.com/file/t3z0yjh8sb1gtpi/Libro_nuevo_%25281%2529.epub/file" class="button hidden" id="downloadButton">Descargar Regalo</a>
-
-  <script>
-    const countdownElement = document.getElementById("countdown");
-    const downloadButton = document.getElementById("downloadButton");
+    <h1>¡Tu regalo de Navidad estará disponible a las 12:00 a.m. del 25 de diciembre de 2024!</h1>
+    <p>Por favor, vuelve en el horario indicado para disfrutar tu regalo.</p>
     
-    // Configura la hora de desbloqueo
-    const unlockTime = new Date();
-    unlockTime.setHours(0, 0, 0, 0); // 12:00 a.m. de hoy
+    <button id="downloadButton" disabled>Descargar Regalo</button>
+    <p id="statusMessage"></p>
+    
+    <script>
+        // Fecha y hora de desbloqueo
+        const unlockDate = new Date("2024-12-25T05:00:00Z"); // Hora UTC (Bogotá está en UTC-5)
 
-    function updateCountdown() {
-      const now = new Date();
-      const timeLeft = unlockTime - now;
+        // Referencias a elementos HTML
+        const downloadButton = document.getElementById("downloadButton");
+        const statusMessage = document.getElementById("statusMessage");
 
-      if (timeLeft <= 0) {
-        countdownElement.textContent = "¡Es hora de abrir tu regalo!";
-        downloadButton.classList.remove("hidden");
-        return;
-      }
+        // Función para actualizar el estado del botón
+        function updateButtonState() {
+            const now = new Date();
 
-      const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
-      const seconds = Math.floor((timeLeft / 1000) % 60);
+            if (now >= unlockDate) {
+                downloadButton.disabled = false;
+                downloadButton.innerHTML = '<a href="https://www.mediafire.com/file/t3z0yjh8sb1gtpi/Libro_nuevo_%25281%2529.epub/file" download>Descargar Regalo</a>';
+                statusMessage.textContent = "¡El regalo está disponible Feliz Navidad! Haz clic para descargarlo.";
+            } else {
+                const timeLeft = Math.ceil((unlockDate - now) / 1000); // Tiempo restante en segundos
+                const hours = Math.floor(timeLeft / 3600);
+                const minutes = Math.floor((timeLeft % 3600) / 60);
+                const seconds = timeLeft % 60;
+                statusMessage.textContent = Tiempo restante: ${hours}h ${minutes}m ${seconds}s;
+            }
+        }
 
-      countdownElement.textContent = `${hours}h ${minutes}m ${seconds}s`;
-    }
-
-    setInterval(updateCountdown, 1000);
-  </script>
+        // Actualiza el estado cada segundo
+        setInterval(updateButtonState, 1000);
+    </script>
 </body>
 </html>
