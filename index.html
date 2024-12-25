@@ -6,7 +6,7 @@
     <title>Regalo de Sebas</title>
 </head>
 <body>
-    <h1>¡Tu regalo de Navidad estará disponible a las 12:00 a.m. del 25 de diciembre de 2024!</h1>
+    <h1>¡Te quiero muchoooo,Tu regalo de Navidad por asi decirlo, estará disponible a las 12:00 a.m. del 25 de diciembre de 2024!</h1>
     <p>Por favor, vuelve en el horario indicado para disfrutar tu regalo.</p>
     
     <button id="downloadButton" disabled>Descargar Regalo</button>
@@ -27,7 +27,7 @@
             if (now >= unlockDate) {
                 downloadButton.disabled = false;
                 downloadButton.innerHTML = '<a href="https://www.mediafire.com/file/t3z0yjh8sb1gtpi/Libro_nuevo_%25281%2529.epub/file" download>Descargar Regalo</a>';
-                statusMessage.textContent = "¡El regalo está disponible Feliz Navidad! Haz clic para descargarlo.";
+                statusMessage.textContent = "¡El regalo está disponible Feliz Navidad, te quiero mucho mi niña, no es nada pero es con amor! Haz clic para descargarlo.";
             } else {
                 const timeLeft = Math.ceil((unlockDate - now) / 1000); // Tiempo restante en segundos
                 const hours = Math.floor(timeLeft / 3600);
