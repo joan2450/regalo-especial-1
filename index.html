@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regalo Especial</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f8f9fa;
+      color: #343a40;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      margin-top: 50px;
+    }
+    .countdown {
+      font-size: 2rem;
+      margin: 20px 0;
+    }
+    .hidden {
+      display: none;
+    }
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+    .button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>¡Regalo Misterioso!</h1>
+  <p>El regalo estará disponible a las 12:00 a.m.</p>
+  <div class="countdown" id="countdown"></div>
+  <a href="https://www.mediafire.com/file/t3z0yjh8sb1gtpi/Libro_nuevo_%25281%2529.epub/file" class="button hidden" id="downloadButton">Descargar Regalo</a>
+
+  <script>
+    const countdownElement = document.getElementById("countdown");
+    const downloadButton = document.getElementById("downloadButton");
+    
+    // Configura la hora de desbloqueo
+    const unlockTime = new Date();
+    unlockTime.setHours(0, 0, 0, 0); // 12:00 a.m. de hoy
+
+    function updateCountdown() {
+      const now = new Date();
+      const timeLeft = unlockTime - now;
+
+      if (timeLeft <= 0) {
+        countdownElement.textContent = "¡Es hora de abrir tu regalo!";
+        downloadButton.classList.remove("hidden");
+        return;
+      }
+
+      const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+      const seconds = Math.floor((timeLeft / 1000) % 60);
+
+      countdownElement.textContent = `${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
